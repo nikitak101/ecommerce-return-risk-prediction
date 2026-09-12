@@ -1,0 +1,26 @@
+column,type,description
+order_id,string,Unique order id
+marketplace_region,string,Buyer region (DE/NL/UK/FR/US/ES/IT/PL/CN) — return culture varies
+category,string,"Garment category (trousers, jeans, dress, shoes, ...)"
+fabric,string,Fabric type; stretch fabrics are more fit-forgiving
+price_usd,float,Item price (USD)
+discount_pct,int,Discount applied (%)
+is_premium,int,1 if item in top price quintile
+size_ordered,int,Ordered size on 0-6 scale (XS..XXXL)
+size_usual,int,Customer usual size on 0-6 scale
+size_mismatch,int,abs(size_ordered - size_usual) — the dominant return driver
+ordered_multiple_sizes,int,1 if bracketing (multiple sizes of same item)
+fit_type,string,Garment cut: slim / regular / oversized / true_to_size
+customer_prior_orders,int,Number of prior orders by customer
+customer_prior_return_rate,float,Customer historical return rate (0-1)
+avg_review_rating,float,Product average review rating (1-5)
+num_reviews,int,Number of product reviews
+reviews_read,int,1 if buyer read reviews before purchase
+size_chart_viewed,int,1 if size chart was viewed
+model_shown,int,1 if listing showed a model wearing the item
+is_gift,int,1 if flagged as a gift
+device,string,Purchase device: mobile / desktop / tablet
+days_to_delivery,int,Delivery time in days
+return_shipping_free,int,1 if free return shipping offered
+return_reason,string,"Reason if returned (size_too_small/large, poor_fit, wrong_color, changed_mind, quality_defect, damaged) else not_returned"
+returned,int,"TARGET: 1 if the order was returned, else 0"

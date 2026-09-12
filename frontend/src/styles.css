@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+:root {
+  font-family: "DM Sans", sans-serif;
+  color: #24251f;
+  background: #f5f1e9;
+  font-synthesis: none;
+  --ink: #24251f;
+  --muted: #74766c;
+  --line: #ded9cf;
+  --paper: #fffdf8;
+  --accent: #2d685b;
+  --accent-dark: #1f4f45;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: radial-gradient(circle at 90% 0%, #e3eee6 0, transparent 28rem), #f5f1e9; }
+button, input, select { font: inherit; }
+.page-shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: 72px 0 88px; }
+.intro { max-width: 720px; margin-bottom: 34px; }
+.eyebrow { margin: 0 0 11px; color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+h1, h2, h3 { font-family: "Space Grotesk", sans-serif; letter-spacing: 0; }
+h1 { max-width: 660px; margin: 0; font-size: clamp(2.7rem, 6vw, 5.2rem); line-height: 0.98; }
+h2 { margin: 0; font-size: 25px; }
+.intro-copy { max-width: 540px; margin: 22px 0 0; color: var(--muted); font-size: 17px; line-height: 1.6; }
+.risk-form, .result-panel, .recommendation-section { border: 1px solid var(--line); background: rgba(255, 253, 248, 0.9); }
+.risk-form { padding: 28px; }
+.form-heading, .section-heading, .result-panel { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.field-count, .section-note { color: var(--muted); font-size: 13px; }
+.field-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 16px; margin: 28px 0; }
+.field { display: grid; gap: 7px; color: #62645a; font-size: 12px; font-weight: 600; }
+.field input:not([type="checkbox"]), .field select { width: 100%; border: 1px solid #d6d1c6; border-radius: 3px; background: #fffefa; color: var(--ink); padding: 11px 12px; outline: none; }
+.field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(45, 104, 91, 0.11); }
+.checkbox-field { display: flex; align-items: center; gap: 10px; min-height: 66px; padding: 13px; border: 1px solid #d6d1c6; background: #fffefa; }
+.checkbox-field input { width: 17px; height: 17px; accent-color: var(--accent); }
+.submit-button { border: 0; border-radius: 3px; background: var(--accent); color: white; padding: 13px 20px; font-weight: 700; cursor: pointer; }
+.submit-button:hover { background: var(--accent-dark); }
+.submit-button:disabled { cursor: wait; opacity: 0.7; }
+.result-panel { align-items: center; margin-top: 20px; padding: 24px 28px; }
+.risk-summary { display: flex; align-items: center; gap: 15px; }
+.risk-summary strong { font-family: "Space Grotesk", sans-serif; font-size: 36px; }
+.risk-badge { border-radius: 100px; padding: 7px 12px; font-size: 12px; font-weight: 700; }
+.risk-low { background: #dcefe1; color: #216238; }
+.risk-medium { background: #fff0cf; color: #95600e; }
+.risk-high { background: #f8d9d4; color: #a33e32; }
+.recommendation-section { margin-top: 20px; padding: 28px; }
+.recommendation-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 24px; }
+.recommendation-card { padding: 18px; border: 1px solid var(--line); background: #fffefa; }
+.card-topline, dl div { display: flex; justify-content: space-between; gap: 12px; }
+.card-topline, .fit-label, dt { color: var(--muted); font-size: 12px; }
+.return-rate { color: var(--accent); font-weight: 700; }
+.recommendation-card h3 { margin: 25px 0 3px; font-size: 22px; text-transform: capitalize; }
+.fit-label { margin: 0 0 21px; text-transform: capitalize; }
+dl { margin: 0; border-top: 1px solid var(--line); }
+dl div { padding: 9px 0; border-bottom: 1px solid var(--line); }
+dt, dd { margin: 0; }
+dd { color: var(--ink); font-size: 13px; font-weight: 600; }
+.muted-message, .error-message { color: var(--muted); }
+.error-message { margin: 0 0 18px; color: #a33e32; }
+@media (max-width: 760px) {
+  .page-shell { width: min(100% - 24px, 600px); padding-top: 42px; }
+  .field-grid, .recommendation-grid { grid-template-columns: 1fr 1fr; }
+  .result-panel, .section-heading { align-items: flex-start; flex-direction: column; }
+}
+@media (max-width: 480px) {
+  .field-grid, .recommendation-grid { grid-template-columns: 1fr; }
+  .risk-form, .recommendation-section { padding: 20px; }
+  h1 { font-size: 2.8rem; }
+}
