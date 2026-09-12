@@ -1,3 +1,4 @@
+import os
 from typing import Any, Dict
 
 from fastapi import FastAPI
@@ -20,9 +21,15 @@ app = FastAPI(
     version="1.0.0",
     description="Predicts order returns and recommends lower-return virtual products.",
 )
+allowed_origins = [
+    origin.strip()
+    for origin in os.environ.get(
+        "ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:3000"
+    ).split(",")
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
