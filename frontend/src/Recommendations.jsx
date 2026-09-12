@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-
-const API_URL = "http://localhost:8000";
+import { API_BASE_URL } from "./config";
 
 export default function Recommendations({ category, fabric, fit_type, price_usd }) {
   const [recommendations, setRecommendations] = useState(null);
@@ -11,7 +10,7 @@ export default function Recommendations({ category, fabric, fit_type, price_usd 
     setRecommendations(null);
     setError("");
 
-    fetch(`${API_URL}/recommendations`, {
+    fetch(`${API_BASE_URL}/recommendations`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ category, fabric, fit_type, price_usd }),

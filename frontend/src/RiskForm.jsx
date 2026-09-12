@@ -1,6 +1,5 @@
 import { useState } from "react";
-
-const API_URL = "http://localhost:8000";
+import { API_BASE_URL } from "./config";
 
 const defaults = {
   marketplace_region: "US",
@@ -114,7 +113,7 @@ export default function RiskForm({ onResult }) {
     );
 
     try {
-      const response = await fetch(`${API_URL}/predict`, {
+      const response = await fetch(`${API_BASE_URL}/predict`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
