@@ -57,6 +57,30 @@ const labels = {
   return_shipping_free: "Free return shipping",
 };
 
+const customerLabels = {
+  marketplace_region: "Delivery region",
+  category: "Item type",
+  fabric: "Fabric",
+  price_usd: "Price (USD)",
+  discount_pct: "Discount",
+  is_premium: "Premium item",
+  size_ordered: "Size ordered",
+  size_usual: "Usual size",
+  ordered_multiple_sizes: "Ordering more than one size",
+  fit_type: "Fit",
+  customer_prior_orders: "Previous orders",
+  customer_prior_return_rate: "Previous order experience",
+  avg_review_rating: "Review rating",
+  num_reviews: "Review count",
+  reviews_read: "Reviews checked",
+  size_chart_viewed: "Size chart checked",
+  model_shown: "Model shown",
+  is_gift: "Gift order",
+  device: "Shopping device",
+  days_to_delivery: "Delivery days",
+  return_shipping_free: "Free returns",
+};
+
 const booleanFields = new Set([
   "is_premium",
   "ordered_multiple_sizes",
@@ -81,7 +105,12 @@ function bucketRisk(probability) {
   return "High";
 }
 
-export default function RiskForm({ onResult }) {
+function submitLabel(loading, customerFacing) {
+  if (loading) return "Checking your order...";
+  return customerFacing ? "Continue" : "Check return risk";
+}
+
+export default function RiskForm({ onResult, customerFacing = false }) {
   const [form, setForm] = useState(defaults);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -141,7 +170,7 @@ export default function RiskForm({ onResult }) {
       <div className="form-heading">
         <div>
           <p className="eyebrow">ORDER DETAILS</p>
-          <h2>What are you ordering?</h2>
+          <h2>{customerFacing ? "Tell us about your order" : "What are you ordering?"}</h2>
         </div>
         <span className="field-count">21 fields</span>
       </div>
@@ -151,11 +180,11 @@ export default function RiskForm({ onResult }) {
             {booleanFields.has(name) ? (
               <>
                 <input type="checkbox" name={name} checked={form[name]} onChange={updateField} />
-                <span>{labels[name]}</span>
+                <span>{customerFacing ? customerLabels[name] : labels[name]}</span>
               </>
             ) : (
               <>
-                <span>{labels[name]}</span>
+                <span>{customerFacing ? customerLabels[name] : labels[name]}</span>
                 {enums[name] ? (
                   <select name={name} value={form[name]} onChange={updateField}>
                     {enums[name].map((option) => <option key={option} value={option}>{option}</option>)}
@@ -179,7 +208,7 @@ export default function RiskForm({ onResult }) {
       </div>
       {error && <p className="error-message">{error}</p>}
       <button className="submit-button" type="submit" disabled={loading}>
-        {loading ? "Checking risk..." : "Check return risk"}
+        {submitLabel(loading, customerFacing)}
       </button>
     </form>
   );
