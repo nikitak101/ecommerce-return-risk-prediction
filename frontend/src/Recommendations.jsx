@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "./config";
 
-export default function Recommendations({ category, fabric, fit_type, price_usd }) {
+export default function Recommendations({ category, fabric, fit_type, price_usd, customerFacing = false }) {
   const [recommendations, setRecommendations] = useState(null);
   const [error, setError] = useState("");
 
@@ -33,10 +33,12 @@ export default function Recommendations({ category, fabric, fit_type, price_usd 
     <section className="recommendation-section" aria-live="polite">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">A LOWER-RETURN PATH</p>
-          <h2>Alternatives worth comparing</h2>
+          <p className="eyebrow">{customerFacing ? "YOU MAY ALSO LIKE" : "A LOWER-RETURN PATH"}</p>
+          <h2>{customerFacing ? "Options for a better fit" : "Alternatives worth comparing"}</h2>
         </div>
-        <span className="section-note">Same category · more trustworthy history</span>
+        <span className="section-note">
+          {customerFacing ? "Customers with similar choices often prefer these options for a better fit." : "Same category · more trustworthy history"}
+        </span>
       </div>
       {recommendations === null && !error && <p className="muted-message">Finding comparable items...</p>}
       {error && <p className="error-message">{error}</p>}
@@ -46,14 +48,14 @@ export default function Recommendations({ category, fabric, fit_type, price_usd 
           <article className="recommendation-card" key={item.virtual_product_id}>
             <div className="card-topline">
               <span>{item.category}</span>
-              <span className="return-rate">{(item.return_rate * 100).toFixed(1)}% returns</span>
+              {!customerFacing && <span className="return-rate">{(item.return_rate * 100).toFixed(1)}% returns</span>}
             </div>
             <h3>{item.fabric.replaceAll("_", " ")}</h3>
             <p className="fit-label">{item.fit_type.replaceAll("_", " ")} fit</p>
             <dl>
               <div><dt>Average price</dt><dd>${item.avg_price.toFixed(2)}</dd></div>
               <div><dt>Average rating</dt><dd>{item.avg_rating.toFixed(1)} / 5</dd></div>
-              <div><dt>Order history</dt><dd>{item.order_count} orders</dd></div>
+              {!customerFacing && <div><dt>Order history</dt><dd>{item.order_count} orders</dd></div>}
             </dl>
           </article>
         ))}

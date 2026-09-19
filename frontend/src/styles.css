@@ -17,7 +17,12 @@
 body { margin: 0; min-width: 320px; background: radial-gradient(circle at 90% 0%, #e3eee6 0, transparent 28rem), #f5f1e9; }
 button, input, select { font: inherit; }
 .page-shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: 72px 0 88px; }
+.view-toggle { display: inline-flex; margin-bottom: 42px; border: 1px solid var(--line); background: rgba(255, 253, 248, 0.8); }
+.view-toggle button { border: 0; border-right: 1px solid var(--line); background: transparent; color: var(--muted); padding: 11px 16px; font-size: 13px; font-weight: 700; cursor: pointer; }
+.view-toggle button:last-child { border-right: 0; }
+.view-toggle button.active { background: var(--accent); color: white; }
 .intro { max-width: 720px; margin-bottom: 34px; }
+.compact-intro { margin-bottom: 20px; }
 .eyebrow { margin: 0 0 11px; color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
 h1, h2, h3 { font-family: "Space Grotesk", sans-serif; letter-spacing: 0; }
 h1 { max-width: 660px; margin: 0; font-size: clamp(2.7rem, 6vw, 5.2rem); line-height: 0.98; }
@@ -37,6 +42,11 @@ h2 { margin: 0; font-size: 25px; }
 .submit-button:hover { background: var(--accent-dark); }
 .submit-button:disabled { cursor: wait; opacity: 0.7; }
 .result-panel { align-items: center; margin-top: 20px; padding: 24px 28px; }
+.positive-message, .drivers-placeholder, .empty-state { margin-top: 20px; border: 1px solid var(--line); background: rgba(255, 253, 248, 0.9); padding: 24px 28px; }
+.positive-message h2, .drivers-placeholder h2 { margin-bottom: 8px; }
+.positive-message p, .drivers-placeholder p:last-child { margin: 0; color: var(--muted); }
+.drivers-placeholder { border-left: 4px solid var(--accent); }
+.empty-state { padding: 32px 28px; }
 .risk-summary { display: flex; align-items: center; gap: 15px; }
 .risk-summary strong { font-family: "Space Grotesk", sans-serif; font-size: 36px; }
 .risk-badge { border-radius: 100px; padding: 7px 12px; font-size: 12px; font-weight: 700; }
@@ -63,6 +73,8 @@ dd { color: var(--ink); font-size: 13px; font-weight: 600; }
   .result-panel, .section-heading { align-items: flex-start; flex-direction: column; }
 }
 @media (max-width: 480px) {
+  .view-toggle { display: flex; width: 100%; }
+  .view-toggle button { flex: 1; padding-inline: 10px; }
   .field-grid, .recommendation-grid { grid-template-columns: 1fr; }
   .risk-form, .recommendation-section { padding: 20px; }
   h1 { font-size: 2.8rem; }
